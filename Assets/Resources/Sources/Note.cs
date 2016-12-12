@@ -19,10 +19,14 @@ public class Note : MonoBehaviour {
     public float MovingTime; // 移動に要する時間
 
     public float JudgeRange;
+    public static NotesManager NotesManager;
 
 	// Use this for initialization
 	void Start () {
-        NoteSpeed = 1f;
+        if(NotesManager == null)
+        {
+            NotesManager = transform.root.gameObject.GetComponent<NotesManager>();
+        }
         if (MainCamera == null)
         {
             MainCamera = GameObject.Find("Main Camera");
@@ -35,8 +39,8 @@ public class Note : MonoBehaviour {
         if(Effect == null)
         {
             Effect = Resources.Load("Prefabs/Particle") as GameObject;
-            Debug.Log(Effect);
         }
+        NoteSpeed = NotesManager.NoteSpeed;
         StartTime = Time.timeSinceLevelLoad;
         StartPosition = GetStartPosition();
         EndPosition = GetEndPosition();
@@ -82,17 +86,18 @@ public class Note : MonoBehaviour {
             Destroy(gameObject);
             //Instantiate(gameObject, Vector2.zero, Quaternion.identity);
         }
+        Debug.Log(rate);
     }
 
     public void PressBtton()
     {
-        float nowTime = Time.timeSinceLevelLoad;
-        float diff = nowTime - JudgeTime;
-        if (Mathf.Abs(diff) <= JudgeRange)
-        {
-            Instantiate(Effect, new Vector2(0, LinePosition), Quaternion.identity);
-            Destroy(gameObject);
-        }
+        //float nowTime = Time.timeSinceLevelLoad;
+        //float diff = nowTime - JudgeTime;
+        //if (Mathf.Abs(diff) <= JudgeRange)
+        //{
+        //    Instantiate(Effect, new Vector2(0, LinePosition), Quaternion.identity);
+        //    Destroy(gameObject);
+        //}
     }
 }
 

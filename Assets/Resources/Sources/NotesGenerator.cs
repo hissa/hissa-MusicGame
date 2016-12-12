@@ -7,9 +7,11 @@ public class NotesGenerator : MonoBehaviour {
     public GameObject Note;
     public List<float> Notes;
     public float StartTime;
+    public GameObject NotesManager;
 
 	// Use this for initialization
 	void Start () {
+        NotesManager = GameObject.Find("NotesManager");
 	}
 	
 	// Update is called once per frame
@@ -18,7 +20,8 @@ public class NotesGenerator : MonoBehaviour {
 
     public GameObject GenerateNote()
     {
-        GameObject createdObject = Instantiate(Note, new Vector2(0, 1000), Quaternion.identity);
+        GameObject createdObject = Instantiate(Note, new Vector2(0, 5000), Quaternion.identity);
+        createdObject.transform.parent = NotesManager.transform;
         return createdObject;
     }
 }

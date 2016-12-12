@@ -12,10 +12,15 @@ public class KeyInputHandler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        bool isPressed = Input.GetKeyDown(HandleKey);
-        if (isPressed)
-        {
-            GameObject.Find("Note(Clone)").GetComponent<Note>().PressBtton();
-        }
 	}
+
+    public bool IsPressed(KeyCode key)
+    {
+        return Input.GetKeyDown(key);
+    }
+
+    public bool IsPressing(KeyCode key)
+    {
+        return Input.GetKey(key);
+    }
 }
