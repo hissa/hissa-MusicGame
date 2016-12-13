@@ -16,31 +16,82 @@ public class NotesManager : MonoBehaviour {
     public KeyInputHandler KeyInputHandler;
     public GameObject EffectGeneratorObject;
     public EffectGenerator EffectGenerator;
+    public GameObject MusicPlayer;
+
+    public bool Begin;
 
 	// Use this for initialization
 	void Start () {
-        NoteSpeed = 1f;
+        Begin = false;
+        NoteSpeed = 0.8f;
         ShowCursor = 0;
         JudgeCursor = 0;
         Generator = NotesGenerator.GetComponent<NotesGenerator>();
-        StartTime = Time.timeSinceLevelLoad;
         Notes = new List<NoteData>();
-        Notes.Add(new NoteData(3f));
-        Notes.Add(new NoteData(3.3636f));
-        Notes.Add(new NoteData(3.5454f));
-        Notes.Add(new NoteData(3.7272f));
-        //Notes.Add(new NoteData(5f));
+        Notes.Add(new NoteData(9.81818181818181f));
+        Notes.Add(new NoteData(10.1818181818182f));
+        Notes.Add(new NoteData(10.5454545454545f));
+        Notes.Add(new NoteData(10.9090909090909f));
+        Notes.Add(new NoteData(11.2727272727273f));
+        Notes.Add(new NoteData(11.6363636363636f));
+        Notes.Add(new NoteData(11.8181818181818f));
+        Notes.Add(new NoteData(12f));
+        Notes.Add(new NoteData(12.3636363636364f));
+        Notes.Add(new NoteData(12.7272727272727f));
+        Notes.Add(new NoteData(13.0909090909091f));
+        Notes.Add(new NoteData(13.4545454545454f));
+        Notes.Add(new NoteData(13.8181818181818f));
+        Notes.Add(new NoteData(14f));
+        Notes.Add(new NoteData(14.1818181818182f));
+        Notes.Add(new NoteData(14.5454545454545f));
+        Notes.Add(new NoteData(14.9090909090909f));
+        Notes.Add(new NoteData(15.2727272727273f));
+        Notes.Add(new NoteData(15.6363636363636f));
+        Notes.Add(new NoteData(16f));
+        Notes.Add(new NoteData(16.1818181818182f));
+        Notes.Add(new NoteData(16.3636363636364f));
+        Notes.Add(new NoteData(16.6363636363636f));
+        Notes.Add(new NoteData(16.9090909090909f));
+        Notes.Add(new NoteData(17.0909090909091f));
+        Notes.Add(new NoteData(17.2727272727273f));
+        Notes.Add(new NoteData(17.4545454545455f));
+        Notes.Add(new NoteData(17.7272727272727f));
+        Notes.Add(new NoteData(18f));
+        Notes.Add(new NoteData(18.1818181818182f));
+        Notes.Add(new NoteData(18.3636363636364f));
+        Notes.Add(new NoteData(18.5454545454545f));
+        for (var i = 0; i < Notes.Count; i++)
+        {
+            Notes[i].Time += 4.15f;
+            Notes[i].Time -= 4f;
+        }
         CreatedNotes = new List<GameObject>();
-        JudgeRange = 0.05f;
+        JudgeRange = 0.065f;
         KeyInputHandler = KeyInputHandlerObject.GetComponent<KeyInputHandler>();
         EffectGenerator = EffectGeneratorObject.GetComponent<EffectGenerator>();
 	}
 	
+    public void MusicStart()
+    {
+        if (Begin)
+        {
+            return;
+        }
+        Begin = true;
+        StartTime = Time.timeSinceLevelLoad;
+        Debug.Log("MusicStart");
+        var mp = MusicPlayer.GetComponent<AudioSource>();
+        mp.Play();
+    }
+
 	// Update is called once per frame
 	void Update () {
-        var musicTime = Time.timeSinceLevelLoad - StartTime;
-        ShowNote(musicTime);
-        JudgeNote(musicTime);
+        if (Begin)
+        {
+            var musicTime = Time.timeSinceLevelLoad - StartTime;
+            ShowNote(musicTime);
+            JudgeNote(musicTime);
+        }
 	}
 
     public void ShowNote(float musicTime)
@@ -56,7 +107,6 @@ public class NotesManager : MonoBehaviour {
     {
         if(JudgeCursor < Notes.Count)
         {
-            Debug.Log(CreatedNotes.Count);
             if (KeyInputHandler.IsPressed(KeyCode.Space) && Mathf.Abs(musicTime - Notes[JudgeCursor].Time) <= JudgeRange)
             {
                 EffectGenerator.ShowEffect();
@@ -65,7 +115,6 @@ public class NotesManager : MonoBehaviour {
                 JudgeCursor++;
             } else if (musicTime - Notes[JudgeCursor].Time > 0 && Mathf.Abs(Notes[JudgeCursor].Time - musicTime) > JudgeRange) 
             {
-                Debug.Log("miss");
                 JudgeCursor++;
                 CreatedNotes.RemoveAt(0);
             }

@@ -38,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1966913686949848}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.04, y: 4.34, z: 0}
-  m_LocalScale: {x: 2, y: 0.5, z: 0}
+  m_LocalScale: {x: 2, y: 0.3, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -105,5 +105,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoteSpeed: 1
-  LinePosition: 0
-  Effect: {fileID: 1982672597066698, guid: d60d2b277725d2247bf171ffc3112bca, type: 2}
+  StartTime: 0
+  EndTime: 0
+  JudgeTime: 0
+  StartPosition: {x: 0, y: 0, z: 0}
+  EndPosition: {x: 0, y: 0, z: 0}
+  MovingTime: 0
+  JudgeRange: 0

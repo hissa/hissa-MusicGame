@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class KeyInputHandler : MonoBehaviour {
-    private KeyCode HandleKey;
-    //private bool WaitReleased = false;
+
+    NotesManager NotesManager;
 	// Use this for initialization
 	void Start () {
-        HandleKey = KeyCode.Space;
+        NotesManager = GameObject.Find("NotesManager").GetComponent<NotesManager>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            NotesManager.MusicStart();
+        }
 	}
 
     public bool IsPressed(KeyCode key)

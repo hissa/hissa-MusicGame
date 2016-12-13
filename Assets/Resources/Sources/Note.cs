@@ -86,7 +86,6 @@ public class Note : MonoBehaviour {
             Destroy(gameObject);
             //Instantiate(gameObject, Vector2.zero, Quaternion.identity);
         }
-        Debug.Log(rate);
     }
 
     public void PressBtton()
