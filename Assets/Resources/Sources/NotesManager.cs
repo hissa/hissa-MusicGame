@@ -62,8 +62,10 @@ public class NotesManager : MonoBehaviour {
         Notes.Add(new NoteData(18.5454545454545f));
         for (var i = 0; i < Notes.Count; i++)
         {
-            Notes[i].Time += 4.15f;
-            Notes[i].Time -= 4f;
+            //DesktopPC
+            //Notes[i].Time += 4.15f;
+            //Notes[i].Time -= 4f;
+            Notes[i].Time += 0;
         }
         CreatedNotes = new List<GameObject>();
         JudgeRange = 0.065f;
