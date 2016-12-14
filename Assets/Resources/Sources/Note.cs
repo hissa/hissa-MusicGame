@@ -21,6 +21,8 @@ public class Note : MonoBehaviour {
     public float JudgeRange;
     public static NotesManager NotesManager;
 
+    public bool DoneAnswerSound;
+
 	// Use this for initialization
 	void Start () {
         if(NotesManager == null)
@@ -47,6 +49,7 @@ public class Note : MonoBehaviour {
         MovingTime = GetMovingTime();
         EndTime = StartTime + MovingTime;
         JudgeTime = StartTime + NoteSpeed;
+        DoneAnswerSound = false;
 
         JudgeRange = 0.05f;
     }
@@ -97,6 +100,15 @@ public class Note : MonoBehaviour {
         //    Instantiate(Effect, new Vector2(0, LinePosition), Quaternion.identity);
         //    Destroy(gameObject);
         //}
+    }
+
+    public void AnswerSound(AudioSource answerSound)
+    {
+        if (!DoneAnswerSound)
+        {
+            answerSound.Play();
+            DoneAnswerSound = true;
+        }
     }
 }
 

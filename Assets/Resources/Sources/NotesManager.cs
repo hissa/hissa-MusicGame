@@ -17,6 +17,8 @@ public class NotesManager : MonoBehaviour {
     public GameObject EffectGeneratorObject;
     public EffectGenerator EffectGenerator;
     public GameObject MusicPlayer;
+    public GameObject AnswerSoundObject;
+    public AudioSource AnswerSound;
 
     public bool Begin;
 
@@ -62,15 +64,19 @@ public class NotesManager : MonoBehaviour {
         Notes.Add(new NoteData(18.5454545454545f));
         for (var i = 0; i < Notes.Count; i++)
         {
-            //DesktopPC
+            // DesktopPC
             //Notes[i].Time += 4.15f;
             //Notes[i].Time -= 4f;
-            Notes[i].Time += 0;
+            // NotePC
+            //Notes[i].Time += 0;
+            Notes[i].Time -= 0.135f; //曲の補正
+            Notes[i].Time += 0.29f; // 機器の補正
         }
         CreatedNotes = new List<GameObject>();
         JudgeRange = 0.065f;
         KeyInputHandler = KeyInputHandlerObject.GetComponent<KeyInputHandler>();
         EffectGenerator = EffectGeneratorObject.GetComponent<EffectGenerator>();
+        AnswerSound = AnswerSoundObject.GetComponent<AudioSource>();
 	}
 	
     public void MusicStart()
@@ -120,6 +126,11 @@ public class NotesManager : MonoBehaviour {
                 JudgeCursor++;
                 CreatedNotes.RemoveAt(0);
             }
+            // アンサー音
+            //if (musicTime - Notes[JudgeCursor].Time >= 0)
+            //{
+            //    CreatedNotes[0].GetComponent<Note>().AnswerSound(AnswerSound);
+            //}
         }
     }
 }
