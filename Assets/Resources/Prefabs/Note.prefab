@@ -104,11 +104,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f5075f4d9c5634bbfa448089e21b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NoteSpeed: 1
-  StartTime: 0
-  EndTime: 0
-  JudgeTime: 0
-  StartPosition: {x: 0, y: 0, z: 0}
-  EndPosition: {x: 0, y: 0, z: 0}
-  MovingTime: 0
-  JudgeRange: 0

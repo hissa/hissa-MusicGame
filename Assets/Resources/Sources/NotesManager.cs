@@ -3,32 +3,65 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NotesManager : MonoBehaviour {
-    public List<NoteData> Notes;
-    public int ShowCursor;
-    public int JudgeCursor;
-    public float StartTime;
-    public List<GameObject> CreatedNotes;
-    public GameObject NotesGenerator;
-    public NotesGenerator Generator;
-    public float NoteSpeed;
-    public float JudgeRange;
-    public GameObject KeyInputHandlerObject;
-    public KeyInputHandler KeyInputHandler;
-    public GameObject EffectGeneratorObject;
-    public EffectGenerator EffectGenerator;
-    public GameObject MusicPlayer;
-    public GameObject AnswerSoundObject;
-    public AudioSource AnswerSound;
+    public GameObjectManager GameObjectManager;
+    private PlayingSettings PlayingSettings;
 
-    public bool Begin;
+    private List<NoteData> Notes;
+    private int ShowCursor;
+    private int JudgeCursor;
+    private List<GameObject> CreatedNotes;
 
-	// Use this for initialization
-	void Start () {
-        Begin = false;
-        NoteSpeed = 0.8f;
+    private float StartTime;
+
+    private NotesGenerator NotesGenerator;
+    private KeyInputHandler KeyInputHandler;
+    private EffectGenerator EffectGenerator;
+    private AudioSource AnswerSound;
+    private AudioSource MusicPlayer;
+
+    private float NoteSpeed;
+    private float JudgeRange;
+    private bool IsUseAnswerSound;
+    
+    public bool IsBegin;
+
+    // Use this for initialization
+    void Start()
+    {
+        Initialize();
+        SetNoteDatas();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (IsBegin)
+        {
+            var musicTime = Time.timeSinceLevelLoad - StartTime;
+            ShowNote(musicTime);
+            JudgeNote(musicTime);
+        }
+    }
+
+    private void Initialize()
+    {
+        PlayingSettings = GameObjectManager.PlayingSettings.GetComponent<PlayingSettings>();
+        IsBegin = false;
+        NoteSpeed = PlayingSettings.NoteSpeed;
+        JudgeRange = PlayingSettings.JudgeRange;
+        IsUseAnswerSound = PlayingSettings.IsUseAnswerSound;
         ShowCursor = 0;
         JudgeCursor = 0;
-        Generator = NotesGenerator.GetComponent<NotesGenerator>();
+        NotesGenerator = GameObjectManager.NotesGenerator.GetComponent<NotesGenerator>();
+        CreatedNotes = new List<GameObject>();
+        KeyInputHandler = GameObjectManager.KeyInputHandler.GetComponent<KeyInputHandler>();
+        EffectGenerator = GameObjectManager.EffectGenerator.GetComponent<EffectGenerator>();
+        AnswerSound = GameObjectManager.AnswerSoundPlayer.GetComponent<AudioSource>();
+        MusicPlayer = GameObjectManager.MusicPlayer.GetComponent<AudioSource>();
+    }
+
+    private void SetNoteDatas()
+    {
         Notes = new List<NoteData>();
         Notes.Add(new NoteData(9.81818181818181f));
         Notes.Add(new NoteData(10.1818181818182f));
@@ -72,41 +105,25 @@ public class NotesManager : MonoBehaviour {
             Notes[i].Time -= 0.135f; //曲の補正
             Notes[i].Time += 0.29f; // 機器の補正
         }
-        CreatedNotes = new List<GameObject>();
-        JudgeRange = 0.065f;
-        KeyInputHandler = KeyInputHandlerObject.GetComponent<KeyInputHandler>();
-        EffectGenerator = EffectGeneratorObject.GetComponent<EffectGenerator>();
-        AnswerSound = AnswerSoundObject.GetComponent<AudioSource>();
-	}
+    }
 	
     public void MusicStart()
     {
-        if (Begin)
+        if (IsBegin)
         {
             return;
         }
-        Begin = true;
+        IsBegin = true;
         StartTime = Time.timeSinceLevelLoad;
         Debug.Log("MusicStart");
-        var mp = MusicPlayer.GetComponent<AudioSource>();
-        mp.Play();
+        MusicPlayer.Play();
     }
-
-	// Update is called once per frame
-	void Update () {
-        if (Begin)
-        {
-            var musicTime = Time.timeSinceLevelLoad - StartTime;
-            ShowNote(musicTime);
-            JudgeNote(musicTime);
-        }
-	}
 
     public void ShowNote(float musicTime)
     {
         if (ShowCursor < Notes.Count && Notes[ShowCursor].Time - NoteSpeed <= musicTime)
         {
-            CreatedNotes.Add(Generator.GenerateNote());
+            CreatedNotes.Add(NotesGenerator.GenerateNote());
             ShowCursor++;
         }
     }
@@ -127,10 +144,10 @@ public class NotesManager : MonoBehaviour {
                 CreatedNotes.RemoveAt(0);
             }
             // アンサー音
-            //if (musicTime - Notes[JudgeCursor].Time >= 0)
-            //{
-            //    CreatedNotes[0].GetComponent<Note>().AnswerSound(AnswerSound);
-            //}
+            if (IsUseAnswerSound && musicTime - Notes[JudgeCursor].Time >= 0)
+            {
+                CreatedNotes[0].GetComponent<Note>().AnswerSound(AnswerSound);
+            }
         }
     }
 }

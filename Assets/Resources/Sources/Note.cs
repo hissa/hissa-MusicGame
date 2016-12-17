@@ -4,59 +4,58 @@ using UnityEngine;
 
 public class Note : MonoBehaviour {
 
-    public float NoteSpeed;
-    public static float LinePosition;
-    static public GameObject Effect;
-    static public GameObject MainCamera;
-    private static Camera Camera;
+    public static GameObjectManager GameObjectManager;
+    private static PlayingSettings PlayingSettings;
 
-    public NoteData NoteData = new NoteData(16f);
-    public float StartTime;
-    public float EndTime;
-    public float JudgeTime;
-    public Vector3 StartPosition;
-    public Vector3 EndPosition;
-    public float MovingTime; // 移動に要する時間
+    public NoteData NoteData { get; set; }
 
-    public float JudgeRange;
-    public static NotesManager NotesManager;
+    private static EffectGenerator EffectGenerator;
+    private static Camera MainCamera;
 
-    public bool DoneAnswerSound;
+    private float StartTime;
 
-	// Use this for initialization
-	void Start () {
-        if(NotesManager == null)
-        {
-            NotesManager = transform.root.gameObject.GetComponent<NotesManager>();
-        }
-        if (MainCamera == null)
-        {
-            MainCamera = GameObject.Find("Main Camera");
-            Camera = MainCamera.GetComponent<Camera>();
-        }
-        if(LinePosition == 0)
-        {
-            LinePosition = GameObject.Find("Line").GetComponent<Transform>().position.y;
-        }
-        if(Effect == null)
-        {
-            Effect = Resources.Load("Prefabs/Particle") as GameObject;
-        }
-        NoteSpeed = NotesManager.NoteSpeed;
+    private float LinePosition;
+    private Vector3 StartPosition;
+    private Vector3 EndPosition;
+    private float MovingTime; // 移動し続ける時間
+
+    private float JudgeRange;
+    private float NoteSpeed;
+
+    private bool IsDoneAnswerSound;
+        
+    private void Initialize()
+    {
+        // 変数がnullだった場合に、他のオブジェクトから取得する。
+        GameObjectManager = GameObjectManager ?? GameObject.Find("GameObjectManager").GetComponent<GameObjectManager>();
+        PlayingSettings = PlayingSettings ?? GameObjectManager.PlayingSettings.GetComponent<PlayingSettings>();
+        MainCamera = MainCamera ?? GameObjectManager.MainCamera.GetComponent<Camera>();
+        EffectGenerator = EffectGenerator ?? GameObjectManager.EffectGenerator.GetComponent<EffectGenerator>();
+        LinePosition = LinePosition == 0 ? GameObjectManager.Line.transform.position.y : LinePosition;
+
+        NoteSpeed = PlayingSettings.NoteSpeed;
+
+        IsDoneAnswerSound = false;
+
         StartTime = Time.timeSinceLevelLoad;
         StartPosition = GetStartPosition();
         EndPosition = GetEndPosition();
         MovingTime = GetMovingTime();
-        EndTime = StartTime + MovingTime;
-        JudgeTime = StartTime + NoteSpeed;
-        DoneAnswerSound = false;
+    }
 
-        JudgeRange = 0.05f;
+    public static void StaticValueDestroy()
+    {
+        // static変数を初期化
+    }
+
+	// Use this for initialization
+	void Start () {
+        Initialize();
     }
 
     private Vector3 GetStartPosition()
     {
-        Vector3 startPosition = Camera.ScreenToWorldPoint(new Vector3(0, Camera.pixelHeight));
+        Vector3 startPosition = MainCamera.ScreenToWorldPoint(new Vector3(0, MainCamera.pixelHeight));
         startPosition.z = 0;
         startPosition.x = 0;
         return startPosition;
@@ -64,7 +63,7 @@ public class Note : MonoBehaviour {
 
     private Vector3 GetEndPosition()
     {
-        Vector3 endPosition = Camera.ScreenToWorldPoint(Vector3.zero);
+        Vector3 endPosition = MainCamera.ScreenToWorldPoint(Vector3.zero);
         endPosition.x = 0;
         endPosition.z = 0;
         return endPosition;
@@ -72,7 +71,7 @@ public class Note : MonoBehaviour {
 
     private float GetMovingTime()
     {
-        float lengthOfOverLine = LinePosition - Camera.ScreenToWorldPoint(Vector3.zero).y;
+        float lengthOfOverLine = LinePosition - MainCamera.ScreenToWorldPoint(Vector3.zero).y;
         float percentageOfOverLine = lengthOfOverLine / (StartPosition.y - EndPosition.y);
         float timeOfOverLine = NoteSpeed * percentageOfOverLine;
         float movingTime = NoteSpeed + timeOfOverLine;
@@ -87,27 +86,15 @@ public class Note : MonoBehaviour {
         if(transform.position.y == EndPosition.y)
         {
             Destroy(gameObject);
-            //Instantiate(gameObject, Vector2.zero, Quaternion.identity);
         }
-    }
-
-    public void PressBtton()
-    {
-        //float nowTime = Time.timeSinceLevelLoad;
-        //float diff = nowTime - JudgeTime;
-        //if (Mathf.Abs(diff) <= JudgeRange)
-        //{
-        //    Instantiate(Effect, new Vector2(0, LinePosition), Quaternion.identity);
-        //    Destroy(gameObject);
-        //}
     }
 
     public void AnswerSound(AudioSource answerSound)
     {
-        if (!DoneAnswerSound)
+        if (!IsDoneAnswerSound)
         {
             answerSound.Play();
-            DoneAnswerSound = true;
+            IsDoneAnswerSound = true;
         }
     }
 }

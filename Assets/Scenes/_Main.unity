@@ -521,6 +521,55 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1287157660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1287157662}
+  - component: {fileID: 1287157661}
+  m_Layer: 0
+  m_Name: GameObjectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1287157661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1287157660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eef843c582075b8419b69eedd07c5dda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 855852917}
+  Line: {fileID: 1458971472}
+  NotesGenerator: {fileID: 2059196772}
+  KeyInputHandler: {fileID: 137881507}
+  NotesManager: {fileID: 1740155158}
+  EffectGenerator: {fileID: 1083887074}
+  MusicPlayer: {fileID: 290310569}
+  AnswerSoundPlayer: {fileID: 859751258}
+  PlayingSettings: {fileID: 2043652976}
+--- !u!4 &1287157662
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1287157660}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.9412551, y: -0.9072031, z: -6.0195312}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1458971472
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,22 +678,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 087bfc7abfe028f4c8861c9d623c3348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowCursor: 0
-  JudgeCursor: 0
-  StartTime: 0
-  CreatedNotes: []
-  NotesGenerator: {fileID: 2059196772}
-  Generator: {fileID: 0}
-  NoteSpeed: 0
-  JudgeRange: 0
-  KeyInputHandlerObject: {fileID: 137881507}
-  KeyInputHandler: {fileID: 0}
-  EffectGeneratorObject: {fileID: 1083887074}
-  EffectGenerator: {fileID: 0}
-  MusicPlayer: {fileID: 290310569}
-  AnswerSoundObject: {fileID: 859751258}
-  AnswerSound: {fileID: 0}
-  Begin: 0
+  GameObjectManager: {fileID: 1287157661}
+  IsBegin: 0
 --- !u!4 &1740155160
 Transform:
   m_ObjectHideFlags: 0
@@ -657,6 +692,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2043652976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2043652978}
+  - component: {fileID: 2043652977}
+  m_Layer: 0
+  m_Name: PlayingSettings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2043652977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2043652976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 496391cccdedc4b43981c35306670cfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NoteSpeed: 0
+  JudgeRange: 0
+--- !u!4 &2043652978
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2043652976}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.9412551, y: -0.9072031, z: -6.0195312}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2059196772
 GameObject:

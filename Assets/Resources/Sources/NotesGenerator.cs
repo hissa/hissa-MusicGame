@@ -18,6 +18,7 @@ public class NotesGenerator : MonoBehaviour {
 	void Update () { 
 	}
 
+    // NoteDataを引数で受け取って、召喚した後NoteDataをオブジェクトに入れるように変更する
     public GameObject GenerateNote()
     {
         GameObject createdObject = Instantiate(Note, new Vector2(0, 5000), Quaternion.identity);
