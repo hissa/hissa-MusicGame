@@ -25,11 +25,18 @@ public class NotesManager : MonoBehaviour {
     
     public bool IsBegin;
 
+    public KeyCode Key;
+
     // Use this for initialization
     void Start()
     {
         Initialize();
         SetNoteDatas();
+    }
+
+    private void Awake()
+    {
+
     }
 
     // Update is called once per frame
@@ -45,7 +52,9 @@ public class NotesManager : MonoBehaviour {
 
     private void Initialize()
     {
+        GameObjectManager = GameObject.Find("GameObjectManager").GetComponent<GameObjectManager>();
         PlayingSettings = GameObjectManager.PlayingSettings.GetComponent<PlayingSettings>();
+        Debug.Log(PlayingSettings.NoteSpeed);
         IsBegin = false;
         NoteSpeed = PlayingSettings.NoteSpeed;
         JudgeRange = PlayingSettings.JudgeRange;
@@ -116,14 +125,19 @@ public class NotesManager : MonoBehaviour {
         IsBegin = true;
         StartTime = Time.timeSinceLevelLoad;
         Debug.Log("MusicStart");
-        MusicPlayer.Play();
+        //debug
+        if (transform.position.x == 0)
+        {
+            MusicPlayer.Play();
+        }
     }
 
     public void ShowNote(float musicTime)
     {
         if (ShowCursor < Notes.Count && Notes[ShowCursor].Time - NoteSpeed <= musicTime)
         {
-            CreatedNotes.Add(NotesGenerator.GenerateNote());
+            GameObject createdObject = NotesGenerator.GenerateNote(gameObject);
+            CreatedNotes.Add(createdObject);
             ShowCursor++;
         }
     }
@@ -132,7 +146,7 @@ public class NotesManager : MonoBehaviour {
     {
         if(JudgeCursor < Notes.Count)
         {
-            if (KeyInputHandler.IsPressed(KeyCode.Space) && Mathf.Abs(musicTime - Notes[JudgeCursor].Time) <= JudgeRange)
+            if (KeyInputHandler.IsPressed(Key) && Mathf.Abs(musicTime - Notes[JudgeCursor].Time) <= JudgeRange)
             {
                 EffectGenerator.ShowEffect();
                 Destroy(CreatedNotes[0]);

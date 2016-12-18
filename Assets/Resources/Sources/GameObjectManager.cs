@@ -13,14 +13,19 @@ public class GameObjectManager : MonoBehaviour {
     public GameObject MusicPlayer;
     public GameObject AnswerSoundPlayer;
     public GameObject PlayingSettings;
+    public List<NotesManager> Lanes;
 
 	// Use this for initialization
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void Awake()
+    {
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }

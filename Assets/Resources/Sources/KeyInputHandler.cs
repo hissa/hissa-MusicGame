@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class KeyInputHandler : MonoBehaviour {
 
+    public GameObjectManager GameObjectManager;
     NotesManager NotesManager;
 	// Use this for initialization
 	void Start () {
@@ -14,7 +15,11 @@ public class KeyInputHandler : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            NotesManager.MusicStart();
+            int laneCount = GameObjectManager.Lanes.Count;
+            for (var i = 0; i <= laneCount - 1; i++)
+            {
+                GameObjectManager.Lanes[i].MusicStart();
+            }
         }
 	}
 

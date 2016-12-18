@@ -14,7 +14,8 @@ public class Note : MonoBehaviour {
 
     private float StartTime;
 
-    private float LinePosition;
+    private static float LinePosition;
+    private float LanePosition;
     private Vector3 StartPosition;
     private Vector3 EndPosition;
     private float MovingTime; // 移動し続ける時間
@@ -36,7 +37,12 @@ public class Note : MonoBehaviour {
         NoteSpeed = PlayingSettings.NoteSpeed;
 
         IsDoneAnswerSound = false;
+        SetPosition();
+    }
 
+    private void SetPosition()
+    {
+        LanePosition = transform.parent.parent.position.x;
         StartTime = Time.timeSinceLevelLoad;
         StartPosition = GetStartPosition();
         EndPosition = GetEndPosition();
@@ -57,14 +63,14 @@ public class Note : MonoBehaviour {
     {
         Vector3 startPosition = MainCamera.ScreenToWorldPoint(new Vector3(0, MainCamera.pixelHeight));
         startPosition.z = 0;
-        startPosition.x = 0;
+        startPosition.x = LanePosition;
         return startPosition;
     }
 
     private Vector3 GetEndPosition()
     {
         Vector3 endPosition = MainCamera.ScreenToWorldPoint(Vector3.zero);
-        endPosition.x = 0;
+        endPosition.x = LanePosition;
         endPosition.z = 0;
         return endPosition;
     }
