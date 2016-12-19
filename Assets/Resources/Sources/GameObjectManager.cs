@@ -14,6 +14,7 @@ public class GameObjectManager : MonoBehaviour {
     public GameObject AnswerSoundPlayer;
     public GameObject PlayingSettings;
     public List<NotesManager> Lanes;
+    public List<LaneBackEffected> EffectedLanes;
     public GameObject NotesDataManager;
 
 	// Use this for initialization

@@ -150,7 +150,8 @@ public class NotesManager : MonoBehaviour {
         {
             if (KeyInputHandler.IsPressed(Key) && Mathf.Abs(musicTime - Notes[JudgeCursor].Time) <= JudgeRange)
             {
-                EffectGenerator.ShowEffect();
+                EffectGenerator.ShowEffect(transform.parent.position.x);
+                GameObjectManager.EffectedLanes[(int)Lane].Show(0.1f);
                 Destroy(CreatedNotes[0]);
                 CreatedNotes.RemoveAt(0);
                 JudgeCursor++;

@@ -5,10 +5,8 @@ using UnityEngine;
 public class KeyInputHandler : MonoBehaviour {
 
     public GameObjectManager GameObjectManager;
-    NotesManager NotesManager;
 	// Use this for initialization
 	void Start () {
-        NotesManager = GameObject.Find("NotesManager").GetComponent<NotesManager>();
 	}
 	
 	// Update is called once per frame
