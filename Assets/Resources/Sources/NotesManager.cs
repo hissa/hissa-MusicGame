@@ -26,6 +26,7 @@ public class NotesManager : MonoBehaviour {
     public bool IsBegin;
 
     public KeyCode Key;
+    public Lanes Lane;
 
     // Use this for initialization
     void Start()
@@ -72,38 +73,39 @@ public class NotesManager : MonoBehaviour {
     private void SetNoteDatas()
     {
         Notes = new List<NoteData>();
-        Notes.Add(new NoteData(9.81818181818181f));
-        Notes.Add(new NoteData(10.1818181818182f));
-        Notes.Add(new NoteData(10.5454545454545f));
-        Notes.Add(new NoteData(10.9090909090909f));
-        Notes.Add(new NoteData(11.2727272727273f));
-        Notes.Add(new NoteData(11.6363636363636f));
-        Notes.Add(new NoteData(11.8181818181818f));
-        Notes.Add(new NoteData(12f));
-        Notes.Add(new NoteData(12.3636363636364f));
-        Notes.Add(new NoteData(12.7272727272727f));
-        Notes.Add(new NoteData(13.0909090909091f));
-        Notes.Add(new NoteData(13.4545454545454f));
-        Notes.Add(new NoteData(13.8181818181818f));
-        Notes.Add(new NoteData(14f));
-        Notes.Add(new NoteData(14.1818181818182f));
-        Notes.Add(new NoteData(14.5454545454545f));
-        Notes.Add(new NoteData(14.9090909090909f));
-        Notes.Add(new NoteData(15.2727272727273f));
-        Notes.Add(new NoteData(15.6363636363636f));
-        Notes.Add(new NoteData(16f));
-        Notes.Add(new NoteData(16.1818181818182f));
-        Notes.Add(new NoteData(16.3636363636364f));
-        Notes.Add(new NoteData(16.6363636363636f));
-        Notes.Add(new NoteData(16.9090909090909f));
-        Notes.Add(new NoteData(17.0909090909091f));
-        Notes.Add(new NoteData(17.2727272727273f));
-        Notes.Add(new NoteData(17.4545454545455f));
-        Notes.Add(new NoteData(17.7272727272727f));
-        Notes.Add(new NoteData(18f));
-        Notes.Add(new NoteData(18.1818181818182f));
-        Notes.Add(new NoteData(18.3636363636364f));
-        Notes.Add(new NoteData(18.5454545454545f));
+        //Notes.Add(new NoteData(9.81818181818181f));
+        //Notes.Add(new NoteData(10.1818181818182f));
+        //Notes.Add(new NoteData(10.5454545454545f));
+        //Notes.Add(new NoteData(10.9090909090909f));
+        //Notes.Add(new NoteData(11.2727272727273f));
+        //Notes.Add(new NoteData(11.6363636363636f));
+        //Notes.Add(new NoteData(11.8181818181818f));
+        //Notes.Add(new NoteData(12f));
+        //Notes.Add(new NoteData(12.3636363636364f));
+        //Notes.Add(new NoteData(12.7272727272727f));
+        //Notes.Add(new NoteData(13.0909090909091f));
+        //Notes.Add(new NoteData(13.4545454545454f));
+        //Notes.Add(new NoteData(13.8181818181818f));
+        //Notes.Add(new NoteData(14f));
+        //Notes.Add(new NoteData(14.1818181818182f));
+        //Notes.Add(new NoteData(14.5454545454545f));
+        //Notes.Add(new NoteData(14.9090909090909f));
+        //Notes.Add(new NoteData(15.2727272727273f));
+        //Notes.Add(new NoteData(15.6363636363636f));
+        //Notes.Add(new NoteData(16f));
+        //Notes.Add(new NoteData(16.1818181818182f));
+        //Notes.Add(new NoteData(16.3636363636364f));
+        //Notes.Add(new NoteData(16.6363636363636f));
+        //Notes.Add(new NoteData(16.9090909090909f));
+        //Notes.Add(new NoteData(17.0909090909091f));
+        //Notes.Add(new NoteData(17.2727272727273f));
+        //Notes.Add(new NoteData(17.4545454545455f));
+        //Notes.Add(new NoteData(17.7272727272727f));
+        //Notes.Add(new NoteData(18f));
+        //Notes.Add(new NoteData(18.1818181818182f));
+        //Notes.Add(new NoteData(18.3636363636364f));
+        //Notes.Add(new NoteData(18.5454545454545f));
+        Notes.AddRange(GameObjectManager.NotesDataManager.GetComponent<NotesDataManager>().LaneNotes[(int)Lane]);
         for (var i = 0; i < Notes.Count; i++)
         {
             // DesktopPC

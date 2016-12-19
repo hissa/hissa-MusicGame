@@ -199,6 +199,7 @@ Transform:
   m_Children:
   - {fileID: 1923114553}
   - {fileID: 1740155160}
+  - {fileID: 235110579}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -435,6 +436,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 189288224}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &235110578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 235110579}
+  m_Layer: 0
+  m_Name: NotesDataObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &235110579
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 235110578}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 120965986}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &290310569
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,6 +616,7 @@ MonoBehaviour:
   GameObjectManager: {fileID: 1287157661}
   IsBegin: 0
   Key: 109
+  Lane: 3
 --- !u!1 &386273930
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,6 +660,7 @@ MonoBehaviour:
   GameObjectManager: {fileID: 1287157661}
   IsBegin: 0
   Key: 99
+  Lane: 4
 --- !u!1 &701468399
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,6 +980,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1054776128
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1054776130}
+  - component: {fileID: 1054776129}
+  m_Layer: 0
+  m_Name: NotesDataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1054776129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1054776128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 760d5f20f5233dd488f7f901b03eb57d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameObjectManager: {fileID: 1287157661}
+--- !u!4 &1054776130
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1054776128}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.45706558, y: 0.82909393, z: 0.069134235}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1083887074
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,6 +1106,7 @@ MonoBehaviour:
   - {fileID: 1594913833}
   - {fileID: 291566646}
   - {fileID: 386273932}
+  NotesDataManager: {fileID: 1054776128}
 --- !u!4 &1287157662
 Transform:
   m_ObjectHideFlags: 0
@@ -1090,6 +1163,7 @@ MonoBehaviour:
   GameObjectManager: {fileID: 1287157661}
   IsBegin: 0
   Key: 118
+  Lane: 1
 --- !u!1 &1458971472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,6 +1288,7 @@ MonoBehaviour:
   GameObjectManager: {fileID: 1287157661}
   IsBegin: 0
   Key: 110
+  Lane: 2
 --- !u!1 &1728132558
 GameObject:
   m_ObjectHideFlags: 0
@@ -1274,6 +1349,7 @@ MonoBehaviour:
   GameObjectManager: {fileID: 1287157661}
   IsBegin: 0
   Key: 32
+  Lane: 0
 --- !u!4 &1740155160
 Transform:
   m_ObjectHideFlags: 0

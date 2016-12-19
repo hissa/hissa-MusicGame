@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Note : MonoBehaviour {
+public class Note : MonoBehaviour
+{
 
     public static GameObjectManager GameObjectManager;
     private static PlayingSettings PlayingSettings;
@@ -24,7 +25,7 @@ public class Note : MonoBehaviour {
     private float NoteSpeed;
 
     private bool IsDoneAnswerSound;
-        
+
     private void Initialize()
     {
         // 変数がnullだった場合に、他のオブジェクトから取得する。
@@ -54,15 +55,16 @@ public class Note : MonoBehaviour {
         // static変数を初期化
     }
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         Initialize();
     }
 
     private Vector3 GetStartPosition()
     {
         Vector3 startPosition = MainCamera.ScreenToWorldPoint(new Vector3(0, MainCamera.pixelHeight));
-        startPosition.z = 0;
+        startPosition.z = -1;
         startPosition.x = LanePosition;
         return startPosition;
     }
@@ -71,7 +73,7 @@ public class Note : MonoBehaviour {
     {
         Vector3 endPosition = MainCamera.ScreenToWorldPoint(Vector3.zero);
         endPosition.x = LanePosition;
-        endPosition.z = 0;
+        endPosition.z = -1;
         return endPosition;
     }
 
@@ -83,13 +85,14 @@ public class Note : MonoBehaviour {
         float movingTime = NoteSpeed + timeOfOverLine;
         return movingTime;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         var diff = Time.timeSinceLevelLoad - StartTime;
         var rate = diff / MovingTime;
         transform.position = Vector3.Lerp(StartPosition, EndPosition, rate);
-        if(transform.position.y == EndPosition.y)
+        if (transform.position.y == EndPosition.y)
         {
             Destroy(gameObject);
         }
@@ -102,18 +105,5 @@ public class Note : MonoBehaviour {
             answerSound.Play();
             IsDoneAnswerSound = true;
         }
-    }
-}
-
-// 一つのノートのデータを扱うクラス
-public enum NoteTypes { normal};
-public class NoteData
-{
-    public float Time;
-    public NoteTypes Type = NoteTypes.normal;
-
-    public NoteData(float time)
-    {
-        Time = time;
     }
 }
