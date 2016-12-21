@@ -113,7 +113,7 @@ public class NotesManager : MonoBehaviour {
             //Notes[i].Time -= 4f;
             // NotePC
             //Notes[i].Time += 0;
-            Notes[i].Time -= 0.135f; //曲の補正
+            //Notes[i].Time -= 0.135f; //曲の補正
             Notes[i].Time += 0.29f; // 機器の補正
         }
     }

@@ -6,9 +6,9 @@ using UnityEngine;
 public class PlayingSettings : MonoBehaviour {
 
     // 出現から判定線まで到達するまでの時間
-    public float NoteSpeed = 0.8f;
+    public float NoteSpeed;
     // 判定の幅
-    public float JudgeRange = 0.065f;
+    public float JudgeRange;
     // アンサー音を使用する
     public bool IsUseAnswerSound = false;
 
@@ -28,7 +28,7 @@ public class PlayingSettings : MonoBehaviour {
 
     private void Initialize()
     {
-        NoteSpeed = 0.8f;
+        NoteSpeed = 0.5f;
         JudgeRange = 0.065f;
         IsUseAnswerSound = false;
     }
